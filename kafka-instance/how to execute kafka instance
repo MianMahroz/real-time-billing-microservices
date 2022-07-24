@@ -1,0 +1,8 @@
+TO execute kafka and zookeeper just follow below steps:
+
+1- install docker on your machine 
+2- execute below command
+docker-compose -f docker-compose.yml up -d  
+
+
+note: docker compose file is already in repository
