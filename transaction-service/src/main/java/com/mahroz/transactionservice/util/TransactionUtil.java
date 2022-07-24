@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class TransactionUtil {
     private ModelMapper modelMapper;
 
-    TransactionUtil(ModelMapper modelMapper){
+    public TransactionUtil(ModelMapper modelMapper){
         this.modelMapper=modelMapper;
     }
 

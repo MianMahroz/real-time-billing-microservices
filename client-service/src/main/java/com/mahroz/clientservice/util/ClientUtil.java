@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class ClientUtil {
     private ModelMapper modelMapper;
 
-    ClientUtil(ModelMapper modelMapper){
+    public ClientUtil(ModelMapper modelMapper){
         this.modelMapper=modelMapper;
     }
 
