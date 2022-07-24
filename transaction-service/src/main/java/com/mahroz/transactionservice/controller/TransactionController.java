@@ -1,7 +1,10 @@
 package com.mahroz.transactionservice.controller;
 
+import com.mahroz.transactionservice.service.DailyBillingCycle;
+import com.mahroz.transactionservice.service.MonthlyBillingCycle;
 import com.mahroz.transactionservice.service.TransactionService;
 import dto.TransactionDto;
+import enums.BillingInterval;
 import exception_handler.BillingServiceException;
 import exception_handler.ExceptionMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +21,14 @@ import static util.ServiceConstants.RECORD_REMOVED_SUCCESS;
 @RequestMapping("trans")
 public class TransactionController {
     private TransactionService transactionService;
+    private DailyBillingCycle dailyBillingCycle;
+    private MonthlyBillingCycle monthlyBillingCycle;
 
-    TransactionController(TransactionService transactionService){
-        this.transactionService=transactionService;
+
+    public TransactionController(TransactionService transactionService, DailyBillingCycle dailyBillingCycle, MonthlyBillingCycle monthlyBillingCycle) {
+        this.transactionService = transactionService;
+        this.dailyBillingCycle = dailyBillingCycle;
+        this.monthlyBillingCycle = monthlyBillingCycle;
     }
 
     @PostMapping("/save")
@@ -65,4 +73,18 @@ public class TransactionController {
         return new ResponseEntity<>(RECORD_REMOVED_SUCCESS, HttpStatus.OK);
     }
 
+    @GetMapping("/executeBillingCycle/{interval}")
+    public ResponseEntity executeBillingCycle(@PathVariable(name="interval")BillingInterval billingInterval){
+        if(billingInterval==BillingInterval.DAILY){
+            log.info("---------DAILY BILLING CYCLE EXECUTED---------");
+            dailyBillingCycle.executeBillingCycle();
+        } else if (billingInterval==BillingInterval.MONTHLY) {
+            log.info("---------MONTHLY BILLING CYCLE EXECUTED---------");
+            monthlyBillingCycle.executeBillingCycle();
+        }else{
+            return ResponseEntity.ok("INVALID BILLING INTERVAL");
+        }
+
+        return ResponseEntity.ok("BILLING CYCLE COMPLETED");
+    }
 }

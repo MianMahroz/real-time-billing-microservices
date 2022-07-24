@@ -6,6 +6,7 @@ import com.mahroz.transactionservice.producer.TransactionProducer;
 import com.mahroz.transactionservice.repo.TransactionRepository;
 import com.mahroz.transactionservice.util.TransactionUtil;
 import dto.TransactionDto;
+import enums.TransactionStatus;
 import exception_handler.BillingServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -100,5 +101,14 @@ public class TransactionServiceImpl implements TransactionService{
        TransactionEntity eny= transactionUtil.toEntity(transactionDto);
        log.info("------UPDATE TRANS"+eny.toString());
         return transactionUtil.toDto(transactionRepository.save(eny));
+    }
+
+    @Override
+    public List<TransactionDto> fetchTransactionsByStatus(TransactionStatus transactionStatus) {
+        return transactionRepository
+                .getTransactionsByStatus(transactionStatus)
+                .stream()
+                .map(transactionUtil::toDto)
+                .collect(Collectors.toList());
     }
 }

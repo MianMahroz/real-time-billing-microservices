@@ -26,6 +26,7 @@ public class TransactionProducer {
     public void sendTransaction(TransactionDto transactionDto){
         log.info("---------FORWARDING TO TRANSACTION PROCESSOR---------");
         log.info("---------TOPIC---------"+transTopic);
+        log.info("---------PAYLOAD---------"+transactionDto.toString());
 
         transactionProducer.send(transTopic, transactionDto.getOrderId(),transactionDto);
     }

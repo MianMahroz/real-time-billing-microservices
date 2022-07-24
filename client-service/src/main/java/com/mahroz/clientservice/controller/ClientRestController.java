@@ -3,6 +3,7 @@ package com.mahroz.clientservice.controller;
 
 import com.mahroz.clientservice.service.ClientService;
 import dto.ClientDto;
+import enums.BillingInterval;
 import exception_handler.BillingServiceException;
 import exception_handler.ExceptionMapper;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,12 @@ public class ClientRestController {
         }
         clientService.removeClientById(clientId);
         return new ResponseEntity<>(RECORD_REMOVED_SUCCESS, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/list/{interval}")
+    public ResponseEntity<List<ClientDto>> getClients(@RequestBody List<String> clientNames,@PathVariable(name="interval") BillingInterval billingInterval){
+        return ResponseEntity.ok(clientService.fetchClients(clientNames,billingInterval));
     }
 
 }

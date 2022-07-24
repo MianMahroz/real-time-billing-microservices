@@ -34,19 +34,14 @@ public class RealTimeController {
     @GetMapping("/status/{orderId}")
     public ResponseEntity getTransactionStatus(@PathVariable(name="orderId")String orderId) throws BillingServiceException {
 
-        HostInfo hostInfo = interactiveQueryService.getHostInfo(TRANS_STATE_STORE_NAME,
-                orderId, new StringSerializer());
-        log.info("---------HOST INFO---------");
-        log.info(hostInfo.host()+"-"+hostInfo.port());
-
         final ReadOnlyKeyValueStore<String, String> store =
                 interactiveQueryService.getQueryableStore(TRANS_STATE_STORE_NAME, QueryableStoreTypes.keyValueStore());
+        log.info("---------FETCHING DATA FROM STATE STORE---------");
+        log.info("---------ORDERID---------"+orderId);
 
-        if (interactiveQueryService.getCurrentHostInfo().equals(hostInfo)) {
-            //get it from current app store
+        //get it from current app store
             return ResponseEntity.ok(TransactionStatus.valueOf(Optional.ofNullable(store.get(orderId))
                     .orElseThrow(() -> new BillingServiceException(NO_RECORD_FOUND))));
-        }
-        return null;
+
     }
 }

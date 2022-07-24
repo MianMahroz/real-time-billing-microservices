@@ -2,6 +2,7 @@ package com.mahroz.transactionservice.service;
 
 
 import dto.TransactionDto;
+import enums.TransactionStatus;
 import exception_handler.BillingServiceException;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,7 @@ public interface TransactionService {
     public void removeTransactionById(String orderId) throws BillingServiceException;
 
     public TransactionDto updateTransaction(TransactionDto transactionDto);
+
+    public List<TransactionDto> fetchTransactionsByStatus(TransactionStatus transactionStatus);
 
 }

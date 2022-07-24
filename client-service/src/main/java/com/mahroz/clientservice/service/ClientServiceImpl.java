@@ -3,6 +3,7 @@ package com.mahroz.clientservice.service;
 import com.mahroz.clientservice.repo.ClientRepository;
 import com.mahroz.clientservice.util.ClientUtil;
 import dto.ClientDto;
+import enums.BillingInterval;
 import exception_handler.BillingServiceException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,15 @@ public class ClientServiceImpl implements ClientService{
     @Override
     public ClientDto updateClient(ClientDto clientDto) {
         return clientUtil.toDto(clientRepository.save(clientUtil.toEntity(clientDto)));
+    }
+
+
+    @Override
+    public List<ClientDto> fetchClients(List<String> clientNames, BillingInterval billingInterval){
+        return clientRepository
+                .getClients(clientNames,billingInterval)
+                .stream()
+                .map(clientUtil::toDto)
+                .collect(Collectors.toList());
     }
 }

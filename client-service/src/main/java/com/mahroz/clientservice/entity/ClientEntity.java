@@ -4,10 +4,7 @@ import enums.BillingInterval;
 import enums.ClientStatus;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,9 +21,11 @@ public class ClientEntity {
     private String client;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private ClientStatus status;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private BillingInterval billing_interval;
 
     @Column
