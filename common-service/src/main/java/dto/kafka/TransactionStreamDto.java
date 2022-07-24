@@ -1,2 +1,8 @@
-package dto.kafka;public class TransactionStreamDto {
+package dto.kafka;
+
+import lombok.Data;
+
+@Data
+public class TransactionStreamDto {
+
 }

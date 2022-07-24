@@ -1,17 +1,15 @@
-package com.mahroz.clientservice.util;
+package com.mahroz.transactionservice.util;
 
 import exception_handler.BillingServiceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import static util.ServiceUtils.*;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -19,9 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static util.ServiceUtils.toMap;
+
 @ControllerAdvice
 @RestController
-public class ClientExceptionHandler extends ResponseEntityExceptionHandler {
+public class TransactionExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(BillingServiceException.class)
 	public final ResponseEntity<?> billingExceptionHandle(BillingServiceException ex) {

@@ -13,16 +13,13 @@ import static exception_handler.ExceptionMapper.NO_RECORD_FOUND;
 @Service
 public class ClientServiceImpl implements ClientService{
     private ClientRepository clientRepository;
-    private ModelMapper modelMapper;
     private ClientUtil clientUtil;
 
     public ClientServiceImpl(
             ClientRepository clientRepository,
-            ModelMapper modelMapper,
             ClientUtil clientUtil){
 
         this.clientRepository=clientRepository;
-        this.modelMapper=modelMapper;
         this.clientUtil=clientUtil;
     }
 
