@@ -7,8 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="client-service" />
+        <module name="transaction-service" />
         <module name="common-service" />
+        <module name="transaction-processor" />
+        <module name="client-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +18,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="client-service" options="-parameters" />
       <module name="common-service" options="-parameters" />
+      <module name="transaction-processor" options="-parameters" />
+      <module name="transaction-service" options="-parameters" />
     </option>
   </component>
 </project>
