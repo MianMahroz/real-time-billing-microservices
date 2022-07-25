@@ -95,6 +95,9 @@ Also it act as stream consumer and receives APPROVED transaction for processing
    @GetMapping("/executeBillingCycle/{interval}")
     
  
+## KAFKA 
+![kafka topics](https://user-images.githubusercontent.com/28490692/180727254-fe8ad84c-d927-46b3-bb0a-e522e1406b9e.png)
+
 
 
 ## FLOW DIAGRAM
